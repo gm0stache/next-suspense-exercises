@@ -7,8 +7,6 @@ import Spinner from "@/components/Spinner";
 export const dynamic = "force-dynamic";
 
 async function InterviewExercise({ isPlaceholder }) {
-  const comments = isPlaceholder ? null : await getComments();
-
   return (
     <>
       <article className="main-article">
@@ -101,16 +99,19 @@ async function InterviewExercise({ isPlaceholder }) {
 
       <section className="comments-section">
         <h2>Discussion</h2>
-        {isPlaceholder ? (
-          <Spinner />
-        ) : (
-          comments.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
-          ))
-        )}
+        <React.Suspense fallback={<Spinner />}>
+          <Comments />
+        </React.Suspense>
       </section>
     </>
   );
+}
+
+async function Comments() {
+  const comments = await getComments();
+  return comments.map((comment) => (
+    <Comment key={comment.id} comment={comment} />
+  ));
 }
 
 export default InterviewExercise;
