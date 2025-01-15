@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { getGamesInLibrary } from '@/helpers/vapor-helpers';
-import LibraryGameCard from '@/components/LibraryGameCard';
+import { getGamesInLibrary } from "@/helpers/vapor-helpers";
+import LibraryGameCard from "@/components/LibraryGameCard";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 async function VaporExercise() {
   const games = await getGamesInLibrary();
@@ -13,19 +13,13 @@ async function VaporExercise() {
       <header className="library-header">
         <h1>My games</h1>
         <p>
-          <span className="num-of-games">
-            {games.length}
-          </span>{' '}
-          games in library
+          <span className="num-of-games">{games.length}</span> games in library
         </p>
       </header>
       <div className="game-grid">
-        {games.map((game) => (
-          <LibraryGameCard
-            key={game.slug}
-            game={game}
-          />
-        ))}
+        {games.map((game) => {
+          return <LibraryGameCard key={game.slug} game={game} />;
+        })}
       </div>
     </section>
   );
