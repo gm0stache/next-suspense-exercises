@@ -1,10 +1,10 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import { getNavLinks } from "@/helpers/web-base-helpers";
+import { getNavLinks } from '@/helpers/web-base-helpers';
 
-async function SiteFooter({ isPlaceholder }) {
-  const navLinks = isPlaceholder ? null : await getNavLinks();
+async function SiteFooter() {
+  const navLinks = await getNavLinks();
 
   return (
     <footer className="site-footer">
@@ -13,7 +13,8 @@ async function SiteFooter({ isPlaceholder }) {
           Webzip
         </Link>
         <p className="disclaimer">
-          Copyright © 2099 Webzip Inc. All Rights Reserved.
+          Copyright © 2099 Webzip Inc. All Rights
+          Reserved.
         </p>
       </div>
 
@@ -22,13 +23,15 @@ async function SiteFooter({ isPlaceholder }) {
           <h2>Navigation</h2>
           <nav>
             <ol>
-              {isPlaceholder
-                ? null
-                : navLinks.map(({ slug, label, href }) => (
-                    <li key={slug}>
-                      <Link href={href}>{label}</Link>
-                    </li>
-                  ))}
+              {navLinks.map(
+                ({ slug, label, href }) => (
+                  <li key={slug}>
+                    <Link href={href}>
+                      {label}
+                    </Link>
+                  </li>
+                )
+              )}
             </ol>
           </nav>
         </div>
@@ -40,7 +43,9 @@ async function SiteFooter({ isPlaceholder }) {
                 <Link href="">Terms of Use</Link>
               </li>
               <li>
-                <Link href="">Privacy Policy</Link>
+                <Link href="">
+                  Privacy Policy
+                </Link>
               </li>
               <li>
                 <Link href="">Contact</Link>
